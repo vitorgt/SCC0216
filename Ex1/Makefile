@@ -10,8 +10,5 @@ linkedlist.o: linkedlist.c
 adjacencymatrix.o: adjacencymatrix.c
 	gcc adjacencymatrix.c -c
 
-run:
-	./main
-
 clear:
 	rm *.o
