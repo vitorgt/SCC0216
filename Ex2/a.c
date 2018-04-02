@@ -1,7 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include"linkedlist.h"
-#include"fifo.h"
+#include"../ADT/linkedlist.h"
+#include"../ADT/fifo.h"
+#include"../ADT/lifo.h"
 
 void readGraph(node *l, int e){
 	int vo = 0, vd = 0;
