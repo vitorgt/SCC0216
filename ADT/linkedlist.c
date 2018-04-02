@@ -74,6 +74,23 @@ void printLAd(node *l, int p){//prints adjacents to a node
 	printf("\n");
 }
 
+adj LAd(node *l, int p){//returns adjacents to a node
+	node *aux = l[p].link;
+	adj resu;
+	int *to = NULL, i = 0;
+	resu.q = 0;
+	while(aux){
+		to = (int *)realloc(to, sizeof(int)*(++(resu.q)));
+		to[resu.q - 1] = aux->v;
+		aux = aux->link;
+	}
+	resu.aj = (int *)malloc(sizeof(int)*resu.q);
+	for(; i < resu.q; i++){
+		resu.aj[i] = to[i];
+	}
+	return resu;
+}
+
 void lightedgeL(node *l, int v, char dg){//looks for the lightest edge
 	int i = 0, vo = 0, vd = 0, w = 99999999;
 	node *aux = NULL;
