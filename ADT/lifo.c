@@ -1,10 +1,11 @@
-#include<sdtio.h>
+#include<stdio.h>
+#include<stdlib.h>
 #include"lifo.h"
 
-void insertLIFO(lifotype data, lifo a){
-	nodeLIFO new = (nodeLIFO *)malloc(sizeof(nodeLIFO));
-	new.data = data;
-	new.next = a->head;
+void insertLIFO(lifotype data, lifo *a){
+	nodeLIFO *new = (nodeLIFO *)malloc(sizeof(nodeLIFO));
+	new->data = data;
+	new->next = a->head;
 	if(!(a->head)){
 		a->head = new;
 		a->tail = new;
@@ -14,7 +15,7 @@ void insertLIFO(lifotype data, lifo a){
 	}
 }
 
-lifotype removeLIFO(lifo a){
+lifotype removeLIFO(lifo *a){
 	if(!(a->head))
 		printf("Nothing to remove\n");
 	nodeLIFO *temp = a->head;
@@ -24,30 +25,31 @@ lifotype removeLIFO(lifo a){
 	return resu;
 }
 
-void createLIFO(lifo a){
+void createLIFO(lifo *a){
 	a->head = NULL;
 	a->tail = NULL;
 }
 
 int isemptyLIFO(lifo a){
-	if(!(a->head)) return 1;
+	if(!(a.head)) return 1;
 	return 0;
 }
 
 lifotype topLIFO(lifo a){
-	if(!(a->head)){
+	if(!(a.head)){
 		printf("Nothing\n");
-		return NULL;
+		return;
 	}
-	return a->head->data;
+	return a.head->data;
 }
 
 void printLIFO(lifo a){
 	//works onle if lifotype is int
-	nodeLIFO *aux = a->head;
+	nodeLIFO *aux = a.head;
 	while(aux){
 		printf("%d ", aux->data);
 		aux = aux->next;
 	}
+	printf("\n");
 }
 
