@@ -88,6 +88,7 @@ adj LAd(node *l, int p){//returns adjacents to a node
 	for(; i < resu.q; i++){
 		resu.aj[i] = to[i];
 	}
+	free(to);
 	return resu;
 }
 
