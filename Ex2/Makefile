@@ -2,7 +2,7 @@ all: a
 
 
 a: a.c linkedlist.o fifo.o lifo.o
-	gcc a.c linkedlist.o fifo.o lifo.o -o a
+	gcc a.c linkedlist.o fifo.o lifo.o -o a -g
 	rm *.o
 
 linkedlist.o: linkedlist.c
@@ -14,6 +14,12 @@ fifo.o: fifo.c
 lifo.o: lifo.c
 	gcc lifo.c -c
 
-run:
+run: a
 	./a
+
+zip:
+	zip 102849526.zip *.c *.h
+
+val: a
+	valgrind ./a --leak-check=full --track-origins=yes
 
