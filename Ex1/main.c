@@ -1,8 +1,8 @@
 //220m
 #include<stdio.h>
 #include<stdlib.h>
-#include"adjacencymatrix.h"
-#include"linkedlist.h"
+#include"../ADT/adjacencymatrix.h"
+#include"../ADT/linkedlist.h"
 
 void ReadInput(char dg, char ml, int v, int e, int **m, int **mt, node *l, node *lt){
 	if(ml == 'M'){//if adjacency matrix
