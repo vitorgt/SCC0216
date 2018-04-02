@@ -5,11 +5,11 @@ main: main.c linkedlist.o adjacencymatrix.o
 	gcc main.c linkedlist.o adjacencymatrix.o -o main
 	rm *.o
 
-linkedlist.o: linkedlist.c
-	gcc linkedlist.c -c
+linkedlist.o: ../ADT/linkedlist.c
+	gcc ../ADT/linkedlist.c -c
 
-adjacencymatrix.o: adjacencymatrix.c
-	gcc adjacencymatrix.c -c
+adjacencymatrix.o: ../ADT/adjacencymatrix.c
+	gcc ../ADT/adjacencymatrix.c -c
 
 run:
 	./main
