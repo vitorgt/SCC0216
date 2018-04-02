@@ -18,7 +18,7 @@ run: a
 	./a
 
 zip:
-	zip 102849526.zip *.c *.h
+	zip mak.zip *.c *.h
 
 val: a
 	valgrind ./a --leak-check=full --track-origins=yes
