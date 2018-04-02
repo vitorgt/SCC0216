@@ -5,14 +5,14 @@ a: a.c linkedlist.o fifo.o lifo.o
 	gcc a.c linkedlist.o fifo.o lifo.o -o a -g
 	rm *.o
 
-linkedlist.o: linkedlist.c
-	gcc linkedlist.c -c
+linkedlist.o: ../ADT/linkedlist.c
+	gcc ../ADT/linkedlist.c -c
 
-fifo.o: fifo.c
-	gcc fifo.c -c
+fifo.o: ../ADT/fifo.c
+	gcc ../ADT/fifo.c -c
 
-lifo.o: lifo.c
-	gcc lifo.c -c
+lifo.o: ../ADT/lifo.c
+	gcc ../ADT/lifo.c -c
 
 run: a
 	./a
