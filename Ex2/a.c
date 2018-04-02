@@ -12,7 +12,7 @@ void readGraph(node *l, int e){
 }
 
 void bfs(node *l, fifo *queue, int v, int vo, int vd){
-	int i = 0;
+	int i = 0, success = 0;
 
 	int *c;//"color" array: #0 not yet visited #1 visited #2 ajdacents visited
 	int *p;
@@ -29,28 +29,48 @@ void bfs(node *l, fifo *queue, int v, int vo, int vd){
 	insertFIFO(vo, queue);
 	printFIFO(*queue);
 	while(queue->head){
-		nodeFIFO *u = queue->head;
-		adj adja = LAd(l, u->data);
-		printf("%d adjacentes a %d: ", adja.q, u->data);
-		for(i = 0; i < adja.q; i++){
-			printf("%d ", adja.aj[i]);
-		}
-		printf("\n");
-		for(i = 0; i < adja.q; i++){
-			if(c[adja.aj[i]] == 0){
-				c[adja.aj[i]]++;
-				d[adja.aj[i]] = d[u->data] + 1;
-				if(p[adja.aj[i]] == -1){
-					p[adja.aj[i]] = u->data;
-				}
-				insertFIFO(adja.aj[i], queue);
-				printFIFO(*queue);
+		if(queue->head->data != vd){
+			nodeFIFO *u = queue->head;
+			adj adja = LAd(l, u->data);
+			printf("%d adjacentes a %d: ", adja.q, u->data);
+			for(i = 0; i < adja.q; i++){
+				printf("%d ", adja.aj[i]);
 			}
+			printf("\n");
+			for(i = 0; i < adja.q; i++){
+				if(c[adja.aj[i]] == 0){
+					c[adja.aj[i]]++;
+					d[adja.aj[i]] = d[u->data] + 1;
+					if(p[adja.aj[i]] == -1){
+						p[adja.aj[i]] = u->data;
+					}
+					insertFIFO(adja.aj[i], queue);
+					printFIFO(*queue);
+				}
+			}
+			c[u->data]++;
+			removeFIFO(queue);
+			printFIFO(*queue);
 		}
-		c[u->data]++;
-		removeFIFO(queue);
-		printFIFO(*queue);
+		else{
+			printf("ACHOU\n");
+			success = 1;
+			while(queue->head)
+				removeFIFO(queue);
+		}
 	}
+	for(i = 0; i < v; i++){
+		printf("c[%d]==%2d ", i, c[i]);
+	}
+	printf("\n");
+	for(i = 0; i < v; i++){
+		printf("p[%d]==%2d ", i, p[i]);
+	}
+	printf("\n");
+	for(i = 0; i < v; i++){
+		printf("d[%d]==%2d ", i, d[i]);
+	}
+	printf("\n");
 
 	free(c);
 	free(p);
@@ -73,6 +93,7 @@ int main(){
 	createFIFO(&queue);
 
 	while(scanf("%d %d\n", &op1, &op2) == 2){
+		printf("bfs(o%d, d%d)\n", op1, op2);
 		bfs(l, &queue, v, op1, op2);
 	}
 
