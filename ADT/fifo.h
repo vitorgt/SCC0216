@@ -3,13 +3,13 @@
 
 typedef int fifotype;
 
-typedef struct _node{
+typedef struct _nodeFIFO{
 	fifotype data;
-	struct _node *next;
-}node;
+	struct _nodeFIFO *next;
+}nodeFIFO;
 
 typedef struct _fifo{
-	node *head, *tail;
+	nodeFIFO *head, *tail;
 }fifo;
 
 void insertFIFO(fifotype data, fifo a);

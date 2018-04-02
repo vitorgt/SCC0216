@@ -3,13 +3,13 @@
 
 typedef int lifotype;
 
-typedef struct _node{
+typedef struct _nodeLIFO{
 	lifotype data;
-	struct _node *next;
-}node;
+	struct _nodeLIFO *next;
+}nodeLIFO;
 
 typedef struct _lifo{
-	node *head, *tail;
+	nodeLIFO *head, *tail;
 }lifo;
 
 void insertLIFO(lifotype data, lifo a);

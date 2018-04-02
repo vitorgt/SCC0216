@@ -2,7 +2,7 @@
 #include"lifo.h"
 
 void insertLIFO(lifotype data, lifo a){
-	node new = (node *)malloc(sizeof(node));
+	nodeLIFO new = (nodeLIFO *)malloc(sizeof(nodeLIFO));
 	new.data = data;
 	new.next = a->head;
 	if(!(a->head)){
@@ -17,7 +17,7 @@ void insertLIFO(lifotype data, lifo a){
 lifotype removeLIFO(lifo a){
 	if(!(a->head))
 		printf("Nothing to remove\n");
-	node *temp = a->head;
+	nodeLIFO *temp = a->head;
 	lifotype resu = a->head->data;
 	a->head = a->head->next;
 	free(temp);
@@ -44,7 +44,7 @@ lifotype topLIFO(lifo a){
 
 void printLIFO(lifo a){
 	//works onle if lifotype is int
-	node *aux = a->head;
+	nodeLIFO *aux = a->head;
 	while(aux){
 		printf("%d ", aux->data);
 		aux = aux->next;

@@ -2,7 +2,7 @@
 #include"fifo.h"
 
 void insertFIFO(fifotype data, fifo a){
-	node new = (node *)malloc(sizeof(node));
+	nodeFIFO new = (nodeFIFO *)malloc(sizeof(nodeFIFO));
 	new.data = data;
 	new.next = NULL;
 	if(!(a->head))
@@ -15,7 +15,7 @@ void insertFIFO(fifotype data, fifo a){
 fifotype removeFIFO(fifo a){
 	if(!(a->head))
 		printf("Nothing to remove\n");
-	node *temp = a->head;
+	nodeFIFO *temp = a->head;
 	fifotype resu = a->head->data;
 	a->head = a->head->next;
 	free(temp);
@@ -42,7 +42,7 @@ fifotype topFIFO(fifo a){
 
 void printFIFO(fifo a){
 	//works only if fifotype is int
-	node *aux = a->head;
+	nodeFIFO *aux = a->head;
 	while(aux){
 		printf("%d ", aux->data);
 		aux = aux->next;
