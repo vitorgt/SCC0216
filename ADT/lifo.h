@@ -15,8 +15,6 @@ typedef struct _lifo{
 void insertLIFO(lifotype data, lifo *a);
 lifotype removeLIFO(lifo *a);
 void createLIFO(lifo *a);
-int isemptyLIFO(lifo a);
-lifotype topLIFO(lifo a);
 void printLIFO(lifo a);
 
 #endif
