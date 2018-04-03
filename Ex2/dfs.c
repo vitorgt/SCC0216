@@ -1,7 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include"../ADT/linkedlist.h"
-#include"../ADT/fifo.h"
+#include"../ADT/lifo.h"
+
+/*
 
 void readGraph(node *l, int e){
 	int vo = 0, vd = 0;
@@ -75,7 +77,12 @@ void bfs(node *l, fifo *queue, int v, int vo, int vd){
 	free(d);
 }
 
+*/
+
 int main(){
+
+/*
+
 	int v = 0, e = 0;
 	int op1 = 0, op2 = 0;
 	int i = 0;
@@ -94,6 +101,8 @@ int main(){
 	}
 
 	freeL(l, v);//free linked list
+
+*/
 
 	return 0;
 }

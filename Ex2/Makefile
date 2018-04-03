@@ -1,8 +1,12 @@
-all: a
+all: bfs dfs
 
 
-a: a.c linkedlist.o fifo.o lifo.o
-	gcc a.c linkedlist.o fifo.o lifo.o -o a -g
+bfs: bfs.c linkedlist.o fifo.o
+	gcc bfs.c linkedlist.o fifo.o -o bfs
+	rm *.o
+
+dfs: dfs.c linkedlist.o lifo.o
+	gcc dfs.c linkedlist.o lifo.o -o dfs
 	rm *.o
 
 linkedlist.o: ../ADT/linkedlist.c
@@ -14,12 +18,18 @@ fifo.o: ../ADT/fifo.c
 lifo.o: ../ADT/lifo.c
 	gcc ../ADT/lifo.c -c
 
-run: a
-	./a
+runb: bfs
+	./bfs
+
+runb: dfs
+	./dfs
 
 zip:
-	zip mak.zip *.c *.h
+	zip Makefile.zip *.c *.h Makefile
 
-val: a
-	valgrind ./a --leak-check=full --track-origins=yes
+valb: bfs
+	valgrind ./bfs --leak-check=full --track-origins=yes
+
+vald: dfs
+	valgrind ./dfs --leak-check=full --track-origins=yes
 
