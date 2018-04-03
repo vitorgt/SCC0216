@@ -2,11 +2,11 @@ all: bfs dfs
 
 
 bfs: bfs.c linkedlist.o fifo.o
-	gcc bfs.c linkedlist.o fifo.o -o bfs
+	gcc bfs.c linkedlist.o fifo.o -o bfs -g
 	rm *.o
 
 dfs: dfs.c linkedlist.o lifo.o
-	gcc dfs.c linkedlist.o lifo.o -o dfs
+	gcc dfs.c linkedlist.o lifo.o -o dfs -g
 	rm *.o
 
 linkedlist.o: ../ADT/linkedlist.c
@@ -18,10 +18,7 @@ fifo.o: ../ADT/fifo.c
 lifo.o: ../ADT/lifo.c
 	gcc ../ADT/lifo.c -c
 
-runb: bfs
-	./bfs
-
-runb: dfs
+run: dfs
 	./dfs
 
 zip:
