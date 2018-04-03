@@ -11,11 +11,24 @@ void readGraph(node *l, int e){
 	}
 }
 
-void dfs(node *l, lifo *stack, int v, int vo, int vd){
-	int i = 0, success = 0, ed = 0, ok = 0;
+void dfs(node *l, int ing, int *c, int *p, int *d, int *f, int *time){
+	int i = 0;
+	c[ing]++;
+	d[ing] = (*time)++;
+	adj adja = LAd(l, ing);//find its ajdacents
+	for(i = 0; i < adja.q; i++){//do it for its adjacents
+		if(c[adja.aj[i]] == 0){//if this adjacent hasnt been visited
+			p[adja.aj[i]] = ing;
+			dfs(l, adja.aj[i], c, p, d, f, time);
+		}
+	}
+	c[ing]++;
+	f[ing] = (*time)++;
+	free(adja.aj);
+}
 
-	lifo path;
-	createLIFO(&path);
+void dfsI(node *l, int v, int vo, int vd){
+	int i = 0;
 
 	int *c;//"color" array: #0 not yet visited #1 visited #2 ajdacents visited
 	int *p;//parents array
@@ -28,63 +41,95 @@ void dfs(node *l, lifo *stack, int v, int vo, int vd){
 		c[i] = 0; p[i] = -1; d[i] = -1; f[i] = -1;//clears
 	}
 
-	c[vo]++;//root node painted gray
-	d[vo] = time++;
-	insertLIFO(vo, stack);//enqueue
-	while(stack->head){//while queue isnt empty
-		insertLIFO(stack->head->data, &path);//enqueue
-		if(stack->head->data != vd){//if visiting node isnt the one we're looking for
-			int u = stack->head->data;
-			removeLIFO(stack);
-			adj adja = LAd(l, u);//find its ajdacents
-			ed = 0;
-			ok = 0;
-			for(i = adja.q-1; i >= 0; i--){//do it for its adjacents
-				if(c[adja.aj[i]] == 0){//if this adjacent hasnt been visited
-					c[adja.aj[i]]++;//visit
-					d[adja.aj[i]] = time++;
-					if(p[adja.aj[i]] == -1){//if his parent isnt yet set
-						p[adja.aj[i]] = u;//set his parent
-					}
-					insertLIFO(adja.aj[i], stack);//enqueue
-				}
-				else{
-					ed++;
-					if(adja.aj[i] == vd){
-						ok = 1;
-					}
-				}
-			}
-			if(adja.q == ed && !ok){
-				removeLIFO(&path);
-			}
-			free(adja.aj);
-			c[u]++;//visited all its adjacents, paint it black
-			f[u] = time++;
-		}
-		else{//if we find the node we're looking for
-			success = 1;
-			while(stack->head)
-				removeLIFO(stack);
-		}
-	}
+	dfs(l, vo, c, p, d, f, &time);
 
-	if(success){
-		lifo path2;
-		createLIFO(&path2);
+	if(p[vd] != -1){
+		lifo path;
+		createLIFO(&path);
+		int veri = vd;
+		while(p[veri] != -1){
+			insertLIFO(veri, &path);//enqueue
+			veri = p[veri];
+		}
+		insertLIFO(veri, &path);//enqueue
 		while(path.head){
-			insertLIFO(removeLIFO(&path), &path2);//enqueue
+			printf("%d ", removeLIFO(&path));//enqueue
 		}
-		while(path2.head){
-			printf("%d ", removeLIFO(&path2));//enqueue
-		}
+		printf("\n");
 	}
-	printf("\n");
 
 	free(c);
 	free(p);
 	free(d);
+	free(f);
 }
+
+/*
+   void dfs(node *l, lifo *stack, int v, int vo, int vd){
+   int i = 0, success = 0, ed = 0, ok = 0;
+
+   lifo path;
+   createLIFO(&path);
+
+
+   c[vo]++;//root node painted gray
+   d[vo] = time++;
+   insertLIFO(vo, stack);//enqueue
+   while(stack->head){//while queue isnt empty
+   insertLIFO(stack->head->data, &path);//enqueue
+   if(stack->head->data != vd){//if visiting node isnt the one we're looking for
+   int u = stack->head->data;
+   removeLIFO(stack);
+   adj adja = LAd(l, u);//find its ajdacents
+   ed = 0;
+   ok = 0;
+   for(i = adja.q-1; i >= 0; i--){//do it for its adjacents
+   if(c[adja.aj[i]] == 0){//if this adjacent hasnt been visited
+   c[adja.aj[i]]++;//visit
+   d[adja.aj[i]] = time++;
+   if(p[adja.aj[i]] == -1){//if his parent isnt yet set
+   p[adja.aj[i]] = u;//set his parent
+   }
+   insertLIFO(adja.aj[i], stack);//enqueue
+   }
+   else{
+   ed++;
+   if(adja.aj[i] == vd){
+   ok = 1;
+   }
+   }
+   }
+   if(adja.q == ed && !ok){
+   removeLIFO(&path);
+   }
+   free(adja.aj);
+   c[u]++;//visited all its adjacents, paint it black
+   f[u] = time++;
+   }
+   else{//if we find the node we're looking for
+   success = 1;
+   while(stack->head)
+   removeLIFO(stack);
+   }
+   }
+
+   if(success){
+   lifo path2;
+   createLIFO(&path2);
+   while(path.head){
+   insertLIFO(removeLIFO(&path), &path2);//enqueue
+   }
+   while(path2.head){
+   printf("%d ", removeLIFO(&path2));//enqueue
+   }
+   }
+   printf("\n");
+
+   free(c);
+   free(p);
+   free(d);
+   }
+ */
 
 int main(){
 
@@ -102,7 +147,7 @@ int main(){
 
 	while(scanf("%d %d\n", &op1, &op2) == 2){
 		//printf("dfs(%d, %d)\n", op1, op2);
-		dfs(l, &stack, v, op1, op2);
+		dfsI(l, v, op1, op2);
 	}
 
 	freeL(l, v);//free linked list
