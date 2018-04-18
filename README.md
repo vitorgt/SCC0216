@@ -1,5 +1,5 @@
-# SCC0216
-Computational Modelling in Graphs
+# Computational Modelling in Graphs
+SCC0216
 
 Institute of Mathematical and Computer Sciences
 
