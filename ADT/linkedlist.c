@@ -18,7 +18,7 @@ void clearL(node *l, int v){//clears linked list setting -1
 }
 
 void createN(node *l, int p, int v, int w){
-	int i = 0, repeated = 0;
+	int repeated = 0;
 	node *new = NULL, *aux = &(l[p]);
 	while(aux){//runs the linked list looking for repetitions
 		if(aux->v == v){
