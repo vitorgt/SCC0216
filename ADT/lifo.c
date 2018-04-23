@@ -18,6 +18,7 @@ void insertLIFO(lifotype data, lifo *a){
 lifotype removeLIFO(lifo *a){
 	if(!(a) || !(a->head)){
 		printf("Nothing to remove\n");
+		return (lifotype)0;
 	}
 	else{
 		nodeLIFO *temp = a->head;
