@@ -36,7 +36,7 @@ int isemptyFIFO(fifo a){
 fifotype topFIFO(fifo a){
 	if(!(a.head)){
 		printf("Nothing\n");
-		return;
+		return (fifotype)0;
 	}
 	return a.head->data;
 }
