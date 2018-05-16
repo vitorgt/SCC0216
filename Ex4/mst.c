@@ -16,6 +16,8 @@ void readGraph(node *l, int e){
 }
 
 void mst(node *l, int v){
+	fifoP prio;
+	createFIFOP(&prio);
 	int i = 0;
 	int *c = NULL;//"color" array: #0 not yet visited #1 visited #2 ajdacents visited
 	int *p = NULL;//parents array
@@ -27,8 +29,11 @@ void mst(node *l, int v){
 		c[i] = 0; p[i] = -1; d[i] = inf;
 	}
 
-	//c[vo]++;//root node painted gray
-	//d[vo] = 0;//its distance from root is 0
+	insertFIFOP(createFIFOPnode(0,3,6), &prio);
+	printFIFOP(prio);
+
+	c[0]++;//root node painted gray
+	d[0] = 0;//its distance from root is 0
 }
 
 int main(){
@@ -42,17 +47,6 @@ int main(){
 	readGraph(l, e);//read graph input
 
 	mst(l, v);
-
-	fifoP prio;
-	createFIFOP(&prio);
-	insertFIFOP(createFIFOPnode(3,4,9), &prio);
-	insertFIFOP(createFIFOPnode(0,4,6), &prio);
-	insertFIFOP(createFIFOPnode(1,2,2), &prio);
-	insertFIFOP(createFIFOPnode(0,2,4), &prio);
-	insertFIFOP(createFIFOPnode(2,3,8), &prio);
-	insertFIFOP(createFIFOPnode(0,1,4), &prio);
-	insertFIFOP(createFIFOPnode(0,3,6), &prio);
-	printFIFOP(prio);
 
 	freeL(l, v);//free linked list
 
