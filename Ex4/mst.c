@@ -3,7 +3,7 @@
 #include"../ADT/linkedlist.h"
 #include"../ADT/fifo.h"
 #include"../ADT/lifo.h"
-#include"../ADT/fifoPrio.h"
+#include"../ADT/fifoprio.h"
 
 #define inf 2147483646
 
@@ -27,8 +27,8 @@ void mst(node *l, int v){
 		c[i] = 0; p[i] = -1; d[i] = inf;
 	}
 
-	c[vo]++;//root node painted gray
-	d[vo] = 0;//its distance from root is 0
+	//c[vo]++;//root node painted gray
+	//d[vo] = 0;//its distance from root is 0
 }
 
 int main(){
@@ -42,6 +42,17 @@ int main(){
 	readGraph(l, e);//read graph input
 
 	mst(l, v);
+
+	fifoP prio;
+	createFIFOP(&prio);
+	insertFIFOP(createFIFOPnode(3,4,9), &prio);
+	insertFIFOP(createFIFOPnode(0,4,6), &prio);
+	insertFIFOP(createFIFOPnode(1,2,2), &prio);
+	insertFIFOP(createFIFOPnode(0,2,4), &prio);
+	insertFIFOP(createFIFOPnode(2,3,8), &prio);
+	insertFIFOP(createFIFOPnode(0,1,4), &prio);
+	insertFIFOP(createFIFOPnode(0,3,6), &prio);
+	printFIFOP(prio);
 
 	freeL(l, v);//free linked list
 
