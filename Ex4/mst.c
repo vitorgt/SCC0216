@@ -15,7 +15,7 @@ void readGraph(node *l, int e){
 	}
 }
 
-void mst(node *l, int v){
+void mst(node *l, int v, int vo){//vo := origin vertex
 	fifoP prio;
 	createFIFOP(&prio);
 	int i = 0;
@@ -27,13 +27,16 @@ void mst(node *l, int v){
 	d = (int *)malloc(sizeof(int)*v);
 	for(i = 0; i < v; i++){
 		c[i] = 0; p[i] = -1; d[i] = inf;
+		insertFIFOP(createFIFOPnode(i, d[i]), &prio);
 	}
 
-	insertFIFOP(createFIFOPnode(0,3,6), &prio);
 	printFIFOP(prio);
 
-	c[0]++;//root node painted gray
-	d[0] = 0;//its distance from root is 0
+	c[vo]++;//root node painted gray
+	d[vo] = 0;//its distance from root is 0
+	updateFIFOPnode(createFIFOPnode(vo, d[vo]), &prio);
+
+	printFIFOP(prio);
 }
 
 int main(){
@@ -46,7 +49,7 @@ int main(){
 
 	readGraph(l, e);//read graph input
 
-	mst(l, v);
+	mst(l, v, 0);
 
 	freeL(l, v);//free linked list
 
