@@ -2,10 +2,9 @@
 #include<stdlib.h>
 #include"fifoprio.h"
 
-fifopriotype createFIFOPnode(int vo, int vd, int w){
+fifopriotype createFIFOPnode(int v, int w){
 	fifopriotype a;
-	a.vo = vo;
-	a.vd = vd;
+	a.v = v;
 	a.w = w;
 	return a;
 }
@@ -15,9 +14,8 @@ void insertFIFOP(fifopriotype data, fifoP *a){
 	nodeFIFOP *aux = a->head;
 	new->data = data;
 	new->next = NULL;
-	if(!(a->head)){
+	if(!(a->head))
 		a->head = new;
-	}
 	else if(a->head->data.w > new->data.w){
 		new->next = aux;
 		a->head = new;
@@ -27,7 +25,7 @@ void insertFIFOP(fifopriotype data, fifoP *a){
 			if(aux->next->data.w < new->data.w)
 				aux = aux->next;
 			else if(aux->next->data.w == new->data.w){
-				if(aux->next->data.vd < new->data.vd)
+				if(aux->next->data.v < new->data.v)
 					aux = aux->next;
 				else break;
 			}
@@ -36,6 +34,27 @@ void insertFIFOP(fifopriotype data, fifoP *a){
 		nodeFIFOP *temp = aux->next;
 		aux->next = new;
 		new->next = temp;
+	}
+}
+
+void updateFIFOPnode(fifopriotype data, fifoP *a){
+	if(a && a->head){
+		int ok = 0;
+		nodeFIFOP *aux = a->head, *prev = a->head, *next = a->head->next;
+		while(aux)
+			if(aux->data.v == data.v){
+				//printFIFOP(*a);
+				//&prev = next;
+				//printFIFOP(*a);
+				ok = 1;
+				break;
+			}
+			else{
+				prev = aux;
+				aux  = aux->next;
+				if(aux) next = aux->next;
+			}
+		if(ok) insertFIFOP(data, a);
 	}
 }
 
@@ -70,7 +89,7 @@ fifopriotype topFIFOP(fifoP a){
 void printFIFOP(fifoP a){
 	nodeFIFOP *aux = a.head;
 	while(aux){
-		printf("%d %d %d\n", aux->data.vo, aux->data.vd, aux->data.w);
+		printf("%d %d\n", aux->data.v, aux->data.w);
 		aux = aux->next;
 	}
 	printf("\n");
