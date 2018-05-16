@@ -2,7 +2,7 @@
 #define FIFOPRIO_H
 
 typedef struct _fifotype{
-	int vo, vd, w;
+	int v, w;
 }fifopriotype;
 
 typedef struct _nodeFIFOP{
@@ -14,8 +14,9 @@ typedef struct _fifoP{
 	nodeFIFOP *head;
 }fifoP;
 
-fifopriotype createFIFOPnode(int vo, int vd, int w);
+fifopriotype createFIFOPnode(int v, int w);
 void insertFIFOP(fifopriotype data, fifoP *a);
+void updateFIFOPnode(fifopriotype data, fifoP *a);
 fifopriotype removeFIFOP(fifoP *a);
 void createFIFOP(fifoP *a);
 int isemptyFIFOP(fifoP a);
