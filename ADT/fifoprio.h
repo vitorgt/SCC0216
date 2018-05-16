@@ -1,7 +1,7 @@
 #ifndef FIFOPRIO_H
 #define FIFOPRIO_H
 
-typedef struct _node{
+typedef struct _fifotype{
 	int vo, vd, w;
 }fifopriotype;
 
