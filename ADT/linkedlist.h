@@ -18,6 +18,7 @@ void printLAd(node *l, int p);
 adj  LAd(node *l, int p);
 void lightedgeL(node *l, int v, char dg);
 void removeL(node *l, int vo, int vd);
+int weight(node *l, int vo, int vd);
 void freeL(node *l, int v);
 
 #endif

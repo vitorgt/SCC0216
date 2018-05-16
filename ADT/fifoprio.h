@@ -17,6 +17,7 @@ typedef struct _fifoP{
 fifopriotype createFIFOPnode(int v, int w);
 void insertFIFOP(fifopriotype data, fifoP *a);
 void updateFIFOPnode(fifopriotype data, fifoP *a);
+int mapFIFOP(int v, fifoP a);
 fifopriotype removeFIFOP(fifoP *a);
 void createFIFOP(fifoP *a);
 int isemptyFIFOP(fifoP a);

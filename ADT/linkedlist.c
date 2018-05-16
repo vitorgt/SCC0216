@@ -130,6 +130,16 @@ void removeL(node *l, int vo, int vd){//remove node
 		free(del);
 }
 
+int weight(node *l, int vo, int vd){
+	node *aux = l[vo].link;
+	while(aux){
+		if(aux->v == vd)
+			return aux->w;
+		aux = aux->link;
+	}
+	return -1;
+}
+
 void freeL(node *l, int v){
 	int i = 0;
 	node *aux1 = NULL, *aux2 = NULL;

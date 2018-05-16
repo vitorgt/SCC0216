@@ -38,24 +38,44 @@ void insertFIFOP(fifopriotype data, fifoP *a){
 }
 
 void updateFIFOPnode(fifopriotype data, fifoP *a){
-	if(a && a->head){
-		int ok = 0;
-		nodeFIFOP *aux = a->head, *prev = a->head, *next = a->head->next;
+	printFIFOP(*a);
+	int ok = 0;
+	if(a && a->head)
+		if(a->head->data.v == data.v){
+			nodeFIFOP *temp = a->head;
+			a->head = a->head->next;
+			free(temp);
+			insertFIFOP(data, a);
+		}
+		else{
+			nodeFIFOP *aux = a->head;
+			while(aux){
+				if(aux->next->data.v == data.v){
+					ok = 1;
+					nodeFIFOP *temp = aux->next;
+					aux->next = aux->next->next;
+					free(temp);
+					break;
+				}
+				else
+					aux = aux->next;
+			}
+			if(ok) insertFIFOP(data, a);
+		}
+	printFIFOP(*a);
+}
+
+int mapFIFOP(int v, fifoP a){
+	if(a.head){
+		nodeFIFOP *aux = a.head;
 		while(aux)
-			if(aux->data.v == data.v){
-				//printFIFOP(*a);
-				//&prev = next;
-				//printFIFOP(*a);
-				ok = 1;
-				break;
-			}
-			else{
-				prev = aux;
-				aux  = aux->next;
-				if(aux) next = aux->next;
-			}
-		if(ok) insertFIFOP(data, a);
+			if(aux->data.v == v)
+				return aux->data.w;
+			else
+				aux = aux->next;
+		return -1;
 	}
+	return -1;
 }
 
 fifopriotype removeFIFOP(fifoP *a){
